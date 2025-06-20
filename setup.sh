@@ -22,7 +22,7 @@ sudo systemctl enable ssh
 sudo systemctl start ssh
 
 # Download and unzip IT490 project
-wget https://github.com/MattTogee1/IT490/archive/refs/heads/master.zip
+wget https://github.com/MattToegel/IT490/archive/refs/heads/master.zip
 unzip master.zip
 cd IT490-master/
 composer update
