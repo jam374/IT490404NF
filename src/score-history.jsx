@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import '../CSS/ScoreFeatures.css';
 
 const ScoreHistory = () => {
   const [history, setHistory] = useState([]);
 
   useEffect(() => {
-    axios.get('/api/scores/history')
-      .then(res => setHistory(res.data))
-      .catch(err => console.error(err));
+    const fetchHistory = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/scores/history');
+        const data = await response.json();
+        setHistory(data);
+      } catch (error) {
+        console.error('Error fetching score history:', error);
+      }
+    };
+
+    fetchHistory();
   }, []);
 
   return (
