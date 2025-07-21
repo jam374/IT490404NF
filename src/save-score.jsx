@@ -1,17 +1,27 @@
 import React from 'react';
-import axios from 'axios';
 
 const SaveScore = ({ score, timeTaken, questions, username = 'Guest' }) => {
   const handleSave = async () => {
     try {
-      const response = await axios.post('/api/scores/save', {
-        score,
-        timeTaken,
-        questions,
-        username,
-        timestamp: new Date().toISOString()
+      const response = await fetch('http://localhost:5000/api/scores/save', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          score,
+          timeTaken,
+          questions,
+          username,
+          timestamp: new Date().toISOString()
+        }),
       });
-      alert('Score saved successfully!');
+
+      if (response.ok) {
+        alert('Score saved successfully!');
+      } else {
+        alert('Failed to save score.');
+      }
     } catch (error) {
       alert('Error saving score.');
       console.error(error);
