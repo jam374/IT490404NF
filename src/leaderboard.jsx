@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import '../CSS/ScoreFeatures.css';
 
 const Leaderboard = () => {
   const [leaderboard, setLeaderboard] = useState([]);
 
   useEffect(() => {
-    axios.get('/api/scores/leaderboard')
-      .then(res => setLeaderboard(res.data))
-      .catch(err => console.error(err));
+    const fetchLeaderboard = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/scores/leaderboard');
+        const data = await response.json();
+        setLeaderboard(data);
+      } catch (error) {
+        console.error('Error fetching leaderboard:', error);
+      }
+    };
+
+    fetchLeaderboard();
   }, []);
 
   return (
