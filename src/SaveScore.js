@@ -3,11 +3,9 @@ import React from 'react';
 const SaveScore = ({ score, timeTaken, questions, username = 'Guest' }) => {
   const handleSave = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/scores/save', {
+      const response = await fetch('/data/scores.json', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           score,
           timeTaken,
