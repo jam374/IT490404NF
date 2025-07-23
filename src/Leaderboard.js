@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import '../CSS/ScoreFeatures.css';
 
 const Leaderboard = () => {
   const [leaderboard, setLeaderboard] = useState([]);
@@ -7,9 +6,10 @@ const Leaderboard = () => {
   useEffect(() => {
     const fetchLeaderboard = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/scores/leaderboard');
+        const response = await fetch('/data/scores.json');
         const data = await response.json();
-        setLeaderboard(data);
+        const sorted = [...data].sort((a, b) => b.score - a.score);
+        setLeaderboard(sorted.slice(0, 10));
       } catch (error) {
         console.error('Error fetching leaderboard:', error);
       }
